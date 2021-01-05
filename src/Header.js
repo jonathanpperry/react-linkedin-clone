@@ -1,14 +1,25 @@
-import React from "react";
-import "./Header.css";
-import SearchIcon from "@material-ui/icons/Search";
-import HeaderOption from "./HeaderOption";
-import HomeIcon from "@material-ui/icons/Home";
-import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
-import BusinessCenterIcon from "@material-ui/icons/BusinessCenter";
-import ChatIcon from "@material-ui/icons/Chat";
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import React from 'react';
+import './Header.css';
+import SearchIcon from '@material-ui/icons/Search';
+import HeaderOption from './HeaderOption';
+import HomeIcon from '@material-ui/icons/Home';
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
+import ChatIcon from '@material-ui/icons/Chat';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import { useDispatch } from 'react-redux';
+import { logout } from './features/userSlice';
+import { auth } from './firebase';
 
 function Header() {
+  const dispatch = useDispatch();
+
+  const logoutOfApp = () => {
+    console.log('Calling logout of app');
+    dispatch(logout());
+    auth.signOut();
+  };
+
   return (
     <div className="header">
       <div className="header_left">
@@ -33,6 +44,7 @@ function Header() {
         <HeaderOption
           avatar="https://compassionate-leaky-e9b16b.netlify.app/images/16_Sonny.jpeg"
           title="me"
+          onClick={logoutOfApp}
         />
       </div>
     </div>
